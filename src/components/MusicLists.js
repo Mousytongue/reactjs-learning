@@ -1,34 +1,50 @@
-import React from 'react';
-import db from './config';
+import React from "react";
+//import db from './config';
 
+// function PullFromFireStore(props){
+//     const dbdata = [];
 
-class FirebaseDB extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            songs: [],
-        };
-        console.log("database called");
-    }
+//     let rootRef = db.collection('Song');
 
-    componentDidMount(){
-        db.ref('/Song').on('value', querySnapShot => {
-            let data = querySnapShot.val() ? querySnapShot.val() : {};
-            this.setState({
-                songs: data,
-            });
-        })
-        console.log("database called" + this.state.songs);
-    }
-    render(){
-        console.log("database called" + this.state.songs);
-        return (
+//     let classicRef = rootRef.where('Genre', '==', 'Classic Rock').get()
+//         .then(snapshot => {
+//             if (snapshot.empty){
+//                 console.log("Query returned empty");
+//             }
+//             snapshot.forEach(doc => {
+//                 console.log(doc.id, '=>', doc.data());
+//             });
+//         });
+
+//     return classicRef;
+// }
+
+// class FirebaseDB extends React.Component{
+//     constructor(){
+//         super();
+//         this.state = {
+//             songs: [],
+//         };
+//         console.log("database called");
+//     }
+
+//     componentDidMount(){
+//         db.ref('/Song').on('value', querySnapShot => {
+//             let data = querySnapShot.val() ? querySnapShot.val() : {};
+//             this.setState({
+//                 songs: data,
+//             });
+//         })
+//         console.log("database called" + this.state.songs);
+//     }
+//     render(){
+//         console.log("database called" + this.state.songs);
+//         return (
             
-                this.state.songs
-        );
-    }
-}
-
+//                 this.state.songs
+//         );
+//     }
+// }
 
 class ClickableLink extends React.Component{
     constructor(){
@@ -54,24 +70,11 @@ class ClickableLink extends React.Component{
     }  
 }
 
-//props
-// testlinks : [] of strings
-// genre : the genre
-
 class ScrollingGenreList extends React.Component{
     render() {
         const links = [];
         let thisGenre = this.props.genre;
-        
-        //this is not calling. It is literally setting n to be that function.
-        var n = <FirebaseDB />;
 
-        Object.keys(n).map(function(keyName, keyIndex){
-            console.log("Name: " + keyName + " Index " + keyIndex + " Data: " + String(n[keyName]));
-        });
-        
-
-        //Will iterate through 
         this.props.testlinks.forEach((testlink) => {
             if(testlink.genre === thisGenre){
                 links.push(
